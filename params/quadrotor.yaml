@@ -1,0 +1,192 @@
+# Quadrotor 1 configuration
+# name: quad1
+accurate_integration: true
+control_using_estimates: true
+
+# Monte Carlo Parameters
+ekf_random_init: true
+ekf_v0_err: 0.05
+ekf_roll0_err: 0.0524
+ekf_pitch0_err: 0.0524
+ekf_drag0_err: 0.01
+
+# Physical parameters
+x0: [-10, 0, 0,    # POS
+     0, 0, 0,    # VEL
+     0, 0, 0,    # LIN ACC
+     1, 0, 0, 0, # ATT
+     0, 0, 0,    # OMEGA
+     0, 0, 0]    # ANG ACC
+
+origin_latitude: 0.702443501891 # (radians) latitude at flight location
+origin_longitude: -1.9486196478 # (radians) longitude at flight location
+origin_altitude: 1387.998309 # (meters) altitude above sea level at flight location
+origin_temperature: 70 # (degrees Fahrenheit) temperature at flight location
+
+mass: 5.0
+inertia: [0.6271, 0.6271, 1.25]
+#intertia: [0.1,0.1,0.1]
+linear_drag: [0.1, 0.1, 0.001]
+angular_drag: [0.001, 0.001, 0.001]
+
+max_thrust: 98.0665
+#max_thrust: 
+max_roll: 1.0 #1.0
+max_pitch: 1.0 #1.0
+max_yaw_rate: 1.5 #1.5
+max_throttle: 1.0
+#max_vel: 5
+max_vel: 1
+max_tau_x: 200.0
+max_tau_y: 200.0
+max_tau_z: 50.0
+
+# Controller
+throttle_eq: 0.5
+
+Kp: [0.15, 0.15, 0.15]
+Kd: [0.0, 0.0, 0.0]
+Kv: [1.5, 1.5, 1.5]
+
+roll_kp: 10.0 #10.0
+roll_ki: 0.0
+roll_kd: 5.0
+pitch_kp: 10.0
+pitch_ki: 0.0
+pitch_kd: 5.0
+yaw_rate_kp: 10.0
+yaw_rate_ki: 0.0
+yaw_rate_kd: 0.0
+
+circ_kr: 5.0
+circ_kp: 5.0
+circ_kh: 5.0
+
+
+# Trajectory
+
+# 0: waypoints
+# 1: trajectory
+# 2: circumnavigation
+path_type: 0
+
+# waypoints: [
+#             5, 0, -4, 0,
+#             -5, 0, -4, 0,
+#             0, 0, -4, 0,
+#             0, 5, -4, 0,
+#             0, -5, -4, 0,
+#             0, 0, -4, 0,
+#            ]
+waypoint_threshold: 0.1
+waypoint_velocity_threshold: 0.5
+
+traj_delta_north: 10
+traj_delta_east: 10
+traj_delta_alt: 2
+traj_delta_yaw: 0
+traj_nom_north: 0
+traj_nom_east: 0
+traj_nom_alt: 5
+traj_nom_yaw: 0
+traj_north_period: 20
+traj_east_period: 10
+traj_alt_period: 20
+traj_yaw_period: 20
+
+circ_rd: 5.0
+circ_hd: 5.0
+
+
+# Sensors
+imu_enabled: true
+camera_enabled: true
+mocap_enabled: false
+baro_enabled: false
+pitot_enabled: false
+wvane_enabled: false
+gps_enabled: false
+
+use_accel_truth: false
+use_gyro_truth: false
+use_camera_truth: false
+use_mocap_truth: false
+use_baro_truth: false
+use_pitot_truth: false
+use_wvane_truth: false
+use_gps_truth: false
+
+## IMU
+imu_update_rate: 250
+p_ub: [0.0930, -0.0685, 0.0941] # translation from IMU to body in IMU frame
+q_ub: [0.9991, -0.0078, 0.0416, 0.0003] # rotation from IMU to body frame
+# NOTE: do not include any yaw rotation
+
+accel_noise_stdev: 1.0
+accel_bias_init_bound: 1.0
+accel_walk_stdev: 0.1
+
+gyro_noise_stdev: 0.1
+gyro_bias_init_bound: 0.2
+gyro_walk_stdev: 0.01
+
+## Camera
+camera_max_features: 10000 # maximum number of features to project into image
+camera_update_rate: 30
+camera_time_delay: 0.0
+pixel_noise_stdev: 0.5
+depth_noise_stdev: 1.0
+image_size: [640, 480]
+camera_matrix: [480,   0, 320,
+                  0, 480, 240,
+                  0,   0,   1]
+p_uc: [0.1, 0.05, 0.03] # translation from IMU to camera in IMU frame
+q_uc: [0.7071, 0.0, 0.0, 0.7071] # rotation from IMU to camera
+save_pixel_measurements: false
+
+## Motion Capture
+mocap_update_rate: 50
+mocap_time_delay: 0.0
+mocap_noise_stdev: 0.001
+p_um: [0.0930, -0.0685, 0.0941] # translation from IMU to mocap_body in body frame
+q_um: [0.9928, 0.0447, 0.0547, 0.0971] # rotation from IMU to mocap_body
+
+## Barometer
+baro_update_rate: 50
+baro_noise_stdev: 0.5
+baro_bias_init_bound: 1.0
+baro_walk_stdev: 0.01
+
+## Pitot Tube
+pitot_update_rate: 50
+pitot_noise_stdev: 1.0
+pitot_bias_init_bound: 2.0
+pitot_walk_stdev: 0.1
+pitot_azimuth: 0 # relative angle about body z axis to pitot tube direction
+pitot_elevation: 0 # relative angle about body y axis to pitot tube direction
+
+## Weather Vane
+wvane_update_rate: 100
+wvane_noise_stdev: 0.001
+wvane_resolution: 1024 # number of rotary encoder ticks
+wvane_roll: 0 # relative angle about body z axis to weather vane vertical direction
+
+## GPS
+gps_update_rate: 10
+gps_time_constant: 0.009
+gps_horizontal_position_noise_stdev: 0.21
+gps_horizontal_position_bias_init_bound: 4.7
+gps_horizontal_velocity_noise_stdev: 0.05
+gps_vertical_position_noise_stdev: 0.40
+gps_vertical_position_bias_init_bound: 9.2
+gps_vertical_velocity_noise_stdev: 0.15
+
+
+## Target estimator parameters
+bearing_only: true
+use_target_truth: false
+target_z0: [5, 0, 0]
+target_vz0: [0, 0, 0]
+target_gain: 1.0
+target_velocity_gain: 1.0
+target_noise_stdev: 1.0

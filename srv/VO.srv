@@ -1,0 +1,8 @@
+# Service to return desired velocity given other vehicles' position and velocity
+geometry_msgs/Point[] otherPositions
+geometry_msgs/Vector3[] otherVelocities
+geometry_msgs/Point currentPosition
+geometry_msgs/Vector3 currentVelocity
+geometry_msgs/Vector3 desVelocity
+---
+float64[] desVelocity

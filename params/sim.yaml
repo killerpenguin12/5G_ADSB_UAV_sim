@@ -1,0 +1,31 @@
+# Parameters for time, randomness, environment, etc.
+tf: 50 #100
+dt: 0.01 #0.01
+use_random_seed: true
+# collision_radius: 80
+number_vehicles: 20 # Number of vehciles in sim
+
+start_radius: 100 # For waypoint generator radius #3568,2523,1784,1262,798
+max_velocity: 5 #the maximum speed they can achieve
+effective_radiated_power: 1 #the radiated power of the UAVs
+
+enable_wind: false # Turn wind on and off
+random_initial_wind: true # Randomly initialize the wind vector
+wind_init_vector: [-6, 6, 1] # Initial wind vector if not initialized randomly
+wind_north_init_stdev: 6.0 # Variation on the initial north wind component
+wind_east_init_stdev: 6.0 # Variation on the initial east wind component
+wind_down_init_stdev: 1.0 # Variation on the initial down wind component
+wind_north_walk_stdev: 5.0 # Amount of random walk in north wind component
+wind_east_walk_stdev: 5.0 # Amount of random walk in east wind component
+wind_down_walk_stdev: 1.0 # Amount of random walk in down wind component
+
+fly_indoors: true
+landmark_density: 1 # Average points per square meter of wall
+landmark_deviation: 0.2 # Maximum deviation of random points
+outdoor_north_dim: 600 # Total ground length in north dimension
+outdoor_east_dim: 600 # Total ground length in east dimension
+outdoor_height: 2.0 # Max height of hills from ground zero
+outdoor_hill_freq: 0.1 # frequency of hills
+indoor_north_dim: 100 # Total room length in north dimension
+indoor_east_dim: 100 # Total room length in east dimension
+indoor_height: 20 # Total room height

@@ -1,0 +1,41 @@
+Simulation of 20000 vehicles for 30 seconds with an ERP of 0.1
+Number of 2-way MSO collisions: 3909
+Number of 3-way MSO collisions: 7698
+Number of 4-way MSO collisions: 11616
+Number of 5-way MSO collisions: 14362
+Number of 6-way MSO collisions: 15285
+Number of 7-way MSO collisions: 13461
+Number of 8-way MSO collisions: 10574
+Number of 9-way MSO collisions: 7273
+Number of 10-way MSO collisions: 4665
+Number of 11-way MSO collisions: 2739
+Number of 12-way MSO collisions: 1442
+Number of 13-way MSO collisions: 758
+Number of 14-way MSO collisions: 351
+Number of 15-way MSO collisions: 163
+Number of 16-way MSO collisions: 79
+Number of 17-way MSO collisions: 24
+Number of 18-way MSO collisions: 21
+Number of 19-way MSO collisions: 8
+Number of 20-way MSO collisions: 1
+Total MSO collisions: 94429
+Mean collisions per second: 3147.633333333333 
+Variance: 2085.8322222222228 
+Standard Deviation: 45.67091221140895
+Unsuccessful decodes: 11734490190
+Unsuccessful decodes / Desired decodes: 11734490190/11999400000 = 97.79 %
+Failed from MTL: 11088582470--92.41 %
+Failed by chance: 48886298--0.41 %
+Failed from closeness: 4838316--0.04 %
+Failed from message overlap: 420155081--3.5 %
+Failed from MSO collision: 172028025--1.43 %
+Failed from too high power: 0--0.0 %
+
+Failed by chance: 48886298--5.37 %
+Failed from closeness: 4838316--0.53 %
+Failed from message overlap: 420155081--46.13 %
+Failed from MSO collision: 172028025--18.89 %
+Failed from too high power: 0--0.0 %
+Unsuccessful decodes: 11734490190
+Unsuccessful decodes / Desired decodes: 645907720/910817530 = 70.92 %
+Total runtime: 107673.00699067116

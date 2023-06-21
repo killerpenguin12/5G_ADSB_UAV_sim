@@ -1,0 +1,21 @@
+1000 UAS
+         Standard   Short Message   Message Selection   Combined
+  10 W   0.57       0.72            0.62                0.78    
+   1 W   0.63       0.79            0.65                0.83    
+ 0.1 W   0.73       0.92            0.73                0.92    
+0.01 W   0.74       0.93            0.74                0.93    
+
+
+5000 UAS
+         Standard   Short Message   Message Selection   Combined
+  10 W   0.57       0.72            0.62                0.78    
+   1 W   0.63       0.79            0.65                0.83    
+ 0.1 W   0.73       0.92            0.73                0.92    
+0.01 W   0.74       0.93            0.74                0.93    
+
+10000 UAS
+         Standard   Short Message   Message Selection   Combined
+  10 W   0.57       0.72            0.62                0.78    
+   1 W   0.63       0.79            0.65                0.83    
+ 0.1 W   0.73       0.92            0.73                0.92    
+0.01 W   0.74       0.93            0.74                0.93    

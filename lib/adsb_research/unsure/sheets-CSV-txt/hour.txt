@@ -1,0 +1,18 @@
+Number of 2-way MSO collisions: 711949
+Number of 3-way MSO collisions: 103386
+Number of 4-way MSO collisions: 11461
+Number of 5-way MSO collisions: 953
+Number of 6-way MSO collisions: 73
+Number of 7-way MSO collisions: 3
+Total MSO collisions: 827825
+Mean collisions per second: 229.95138888888889 
+Variance: 103.4734702932099 
+Standard Deviation: 10.172191027168626
+Unsuccessful decodes: 3691270361
+Unsuccessful decodes / Desired decodes: 3691270361/7050960000 = 52.35 %
+Failed from MTL: 0--0.0 %
+Failed from closeness: 37385270--0.53 %
+Failed from message overlap: 1833519906--26.0 %
+Failed from MSO collision: 1820365185--25.82 %
+Failed from too high power: 0--0.0 %
+Total runtime: 48894.03126883507

@@ -1,0 +1,275 @@
+# Fixed Wing 1 configuration
+name: wing2
+accurate_integration: true
+control_using_estimates: true
+controller_update_rate: 50
+
+# Physical parameters
+x0: [90, -10, 0,    # POS
+     10, 0, 0,    # VEL
+     0, 0, 0,    # LIN ACC
+     0, 0, 0, 1, # ATT
+     0, 0, 0,    # OMEGA
+     0, 0, 0]    # ANG ACC
+
+compute_trim: false
+Va_star: 5.38 # desired air speed
+R_star: 1e16 # desired turn radius
+gamma_star: 0.0 # desired flight path angle
+
+C_F_t: 15.8159
+C_tau_t: 0
+
+mass: 3.92
+origin_latitude: 0.702443501891 # (radians) latitude at flight location
+origin_longitude: -1.9486196478 # (radians) longitude at flight location
+origin_altitude: 1387.998309 # (meters) altitude above sea level at flight location
+origin_temperature: 70 # (degrees Fahrenheit) temperature at flight location
+
+Jx: 0.213
+Jy: 0.171
+Jz: 0.350
+Jxz: 0.04
+
+wing_S: 0.468
+wing_b: 1.8
+wing_c: 0.26
+wing_M: 50
+wing_epsilon: 0.1592
+wing_alpha0: 0.3040363557
+
+k_motor: 35.0
+k_T_p: 0.0
+k_Omega: 0.0
+
+prop_e: 0.8
+prop_S: 0.0314
+prop_C: 1.0
+
+C_L_0: 0.2869
+C_L_alpha: 5.1378
+C_L_beta: 0.0
+C_L_p: 0.0
+C_L_q: 1.7102
+C_L_r: 0.0
+C_L_delta_a: 0.0
+C_L_delta_e: 0.5202
+C_L_delta_r: 0.0
+
+C_D_0: 0.03087
+C_D_alpha: 0.0043021
+C_D_beta: 0.0
+C_D_p: 0.02815
+C_D_q: 0.2514
+C_D_r: 0.0
+C_D_delta_a: 0.0
+C_D_delta_e: 0.01879
+C_D_delta_r: 0.0
+
+C_el_0: 0.0
+C_el_alpha: 0.00
+C_el_beta: 0.0193
+C_el_p: -0.5406
+C_el_q: 0.0
+C_el_r: 0.1929
+C_el_delta_a: 0.2818
+C_el_delta_e: 0.0
+C_el_delta_r: 0.00096
+
+C_m_0: 0.0362
+C_m_alpha: -0.2627
+C_m_beta: 0.0
+C_m_p: 0.0
+C_m_q: -9.7213
+C_m_r: 0.0
+C_m_delta_a: 0.0
+C_m_delta_e: -1.2392
+C_m_delta_r: 0.0
+
+C_n_0: 0.0
+C_n_alpha: 0.0
+C_n_beta: 0.08557
+C_n_p: -0.0498
+C_n_q: 0.0
+C_n_r: -0.0572
+C_n_delta_a: 0.0095
+C_n_delta_e: 0.0
+C_n_delta_r: -0.06
+
+C_Y_0: 0.0
+C_Y_alpha: 0.00
+C_Y_beta: -0.2471
+C_Y_p: -0.07278
+C_Y_q: 0.0
+C_Y_r: 0.1849
+C_Y_delta_a: -0.02344
+C_Y_delta_e: 0.0
+C_Y_delta_r: 0.1591
+
+delta_a_max: 0.7854
+delta_e_max: 0.7854
+delta_r_max: 0.7854
+
+# Waypoint LQR Controller
+lqr_gain_update_iters: 1 # number if iterations before updating LQR gain matrix
+lqr_v_ref: [16.351, 0, 0.974303]
+lqr_q_ref: [0.999557, 0, 0.0297538, 0]
+lqr_omega_ref: [0, 0, 0]
+lqr_u_ref: [0, 0.0211299, 0.248797, 0]
+lqr_max_v_error: 1.0
+lqr_max_q_error: 0.5236
+lqr_max_omega_error: 1.0
+lqr_chi_inf: 0.7854 # relative course angle command far from line
+lqr_gamma_inf: 0.5236 # relative flight path angle command far from line
+lqr_k_chi: 1000.0 #0.04 # gain on transition from chi_inf to chi_desired
+lqr_k_gamma: 2000.0 #1.0 # gain on transition from gamma_inf to gamma_desired
+lqr_max_roll: 0.5236
+lqr_max_pitch: 0.5236
+lqr_Q: [1e1, 1e0, 1e0, # velocity
+        1e1, 1e1, 1e0, # attitude
+        1e1, 1e1, 1e1] # angular rate
+lqr_R: [1e3, 1e3, 1e0, 1e3] # [aileron, elevator, throttle, rudder]
+lqr_perturb_aircraft_parameters: false
+lqr_perturbation_percentage: 0.3
+
+
+# Trajectory
+
+# 0: waypoints
+# 1: trajectory
+# 2: circumnavigation
+path_type: 0
+
+waypoints: [-90, 0, 0,
+            90, 0, 0]
+waypoint_threshold: 1.0
+
+traj_delta_north: 50
+traj_delta_east: 50
+traj_delta_alt: -10
+traj_nom_north: 0
+traj_nom_east: 0
+traj_nom_alt: 5
+traj_north_period: 20
+traj_east_period: 20
+traj_alt_period: 1e16
+
+circ_rd: 5.0
+circ_hd: 5.0
+
+
+# Sensors
+imu_enabled: true
+camera_enabled: false
+mocap_enabled: false
+baro_enabled: true
+pitot_enabled: true
+wvane_enabled: false
+gps_enabled: true
+
+use_accel_truth: false
+use_gyro_truth: false
+use_camera_truth: false
+use_mocap_truth: false
+use_baro_truth: false
+use_pitot_truth: false
+use_wvane_truth: false
+use_gps_truth: false
+
+## IMU
+imu_update_rate: 250
+p_ub: [0.0, 0.0, 0.0] # translation from IMU to body in IMU frame
+q_ub: [1.0, 0.0, 0.0, 0.0] # rotation from IMU to body frame
+
+accel_noise_stdev: 0.5
+accel_bias_init_bound: 0.5
+accel_walk_stdev: 0.1
+
+gyro_noise_stdev: 0.1
+gyro_bias_init_bound: 0.2
+gyro_walk_stdev: 0.01
+
+## Camera
+camera_max_features: 10000 # maximum number of features to project into image
+camera_update_rate: 50
+camera_time_delay: 0.0
+pixel_noise_stdev: 0.5
+depth_noise_stdev: 1.0
+image_size: [640, 480]
+camera_matrix: [480,   0, 320,
+                  0, 480, 240,
+                  0,   0,   1]
+p_uc: [0, 0, 0] # translation from IMU to camera in IMU frame
+q_uc: [1, 0, 0, 0] # rotation from IMU to camera
+save_pixel_measurements: true
+
+## Motion Capture
+mocap_update_rate: 50
+mocap_time_delay: 0.0
+mocap_noise_stdev: 0.001
+p_um: [0, 0, 0] # translation from IMU to mocap body in IMU frame
+q_um: [1, 0, 0, 0] # rotation from IMU to mocap body
+
+## Barometer
+baro_update_rate: 50
+baro_noise_stdev: 5.0
+baro_bias_init_bound: 50.0
+baro_walk_stdev: 0.1
+
+## Pitot Tube
+pitot_update_rate: 50
+pitot_noise_stdev: 1.0
+pitot_bias_init_bound: 2.0
+pitot_walk_stdev: 0.1
+pitot_azimuth: 0 # relative angle about body z axis to pitot tube direction
+pitot_elevation: 0 # relative angle about body y axis to pitot tube direction
+
+## Weather Vane
+wvane_update_rate: 100
+wvane_noise_stdev: 0.001
+wvane_resolution: 1024 # number of rotary encoder ticks
+wvane_roll: 0 # relative angle about body z axis to weather vane vertical direction
+
+## GPS
+gps_update_rate: 5
+gps_time_constant: 0.012
+gps_horizontal_position_noise_stdev: 0.1
+gps_horizontal_position_bias_init_bound: 2.0
+gps_horizontal_velocity_noise_stdev: 0.05
+gps_vertical_position_noise_stdev: 0.2
+gps_vertical_position_bias_init_bound: 4.0
+gps_vertical_velocity_noise_stdev: 0.15
+
+## EKF Parameters
+ekf_random_init: true # randomly initialize pos/vel/att
+ekf_p0_err: 10
+ekf_v0_err: 2
+ekf_q0_err: 0.3491
+ekf_x0: [0, 20, -100,    # POS
+         20, 0, 0,    # VEL
+         1, 0, 0, 0, # ATT
+         0, 0, 0,    # ACCEL BIAS
+         0, 0, 0,    # GYRO BIAS
+         0, 0, 0,    # WIND
+         0]    # BARO BIAS
+ekf_P0: [100, 100, 100, # POS
+         4, 4, 4, # VEL
+         0.12, 0.12, 0.49, # ATT
+         0.25, 0.25, 0.25, # ACCEL BIAS
+         0.04, 0.04, 0.04, # GYRO BIAS
+         36, 36, 1, # WIND
+         2500]             # BARO BIAS
+ekf_Qx: [0, 0, 0, # POS
+         0, 0, 0, # VEL
+         0, 0, 0, # ATT
+         1e-6, 1e-6, 1e-6, # ACCEL BIAS
+         1e-7, 1e-7, 1e-7, # GYRO BIAS
+         1e-3, 1e-3, 1e-3, # WIND
+         1e-7]             # BARO BIAS
+ekf_Qu: [0.25, 0.25, 0.25, # ACCEL
+         0.01, 0.01, 0.01] # GYRO
+ekf_R_gps: [400, 400, 1600, # POSITION
+            1.0, 1.0, 4.0] # VELOCITY
+ekf_R_baro: 2500
+ekf_R_pitot: 2500
+ekf_R_wvane: 100

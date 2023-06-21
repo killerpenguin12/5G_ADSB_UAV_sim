@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../lib/common_cpp/include/common_cpp/common.h
+iostream
+-
+fstream
+-
+yaml-cpp/yaml.h
+-
+eigen3/Eigen/Eigen
+-
+random
+-
+chrono
+-
+cmath
+-
+
+/home/jonathan/Desktop/5G_uav_sim/lib/common_cpp/src/unit_tests.cpp
+common_cpp/common.h
+/home/jonathan/Desktop/5G_uav_sim/lib/common_cpp/src/common_cpp/common.h
+random
+-
+chrono
+-
+

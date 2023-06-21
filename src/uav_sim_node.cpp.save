@@ -1,0 +1,227 @@
+#include "common_cpp/common.h"
+#include "common_cpp/progress_bar.h"
+#include "quadrotor.h"
+#include "quad_control.h"
+#include "quad_wp_manager.h"
+#include "quad_cvo_manager.h"
+#include "environment.h"
+#include <Python.h>
+
+#include <vector>
+#include "vehicle.h"
+
+#include "waypoint_generator.h"
+
+
+int main(int argc, char** argv)
+{
+
+  bool use_random_seed;
+  double t(0), tf, dt, cRadius, startRadius;
+  int numVehicles;
+
+  // std::string uavSimPath = ros::package::getPath("uav_sim");
+  common::get_yaml_node("use_random_seed", "../params/sim.yaml", use_random_seed);
+  common::get_yaml_node("tf", "../params/sim.yaml", tf);
+  common::get_yaml_node("dt", "../params/sim.yaml", dt);
+  common::get_yaml_node("number_vehicles", "../params/sim.yaml", numVehicles);
+  common::get_yaml_node("start_radius", "../params/sim.yaml", startRadius);
+
+  common::get_yaml_node("collision_radius", "../params/cvo.yaml", cRadius);
+
+
+  if (use_random_seed)
+    std::srand((unsigned)std::time(NULL));
+
+  // Create progress bar
+  common::ProgressBar prog_bar;
+  prog_bar.init(tf/dt,40);
+
+  // Create environment
+  environment::Environment env("../params/sim.yaml");
+
+  quadrotor::Quadrotor* quads[numVehicles];
+  quadrotor::Controller* quadControllers[numVehicles];
+  quadrotor::WPManager* quadWPManagers[numVehicles];
+  quadrotor::CVOManager* quadCVOManagers[numVehicles];
+
+  WaypointGenerator wyGen = WaypointGenerator(startRadius, numVehicles, cRadius);
+  std::vector<Eigen::Vector2d> allWaypoints = wyGen.get_even_waypoints();
+  int numWaypoints = allWaypoints.size()/numVehicles;
+
+  for(int i(0); i<numVehicles; i++)
+  {
+    std::vector<double> waypoints;
+    std::string name = "quad"+std::to_string(i);
+
+    for(int j(0); j<numWaypoints; j++)
+    {
+      waypoints.push_back(allWaypoints[numWaypoints*i+j](0));
+      waypoints.push_back(allWaypoints[numWaypoints*i+j](1));
+      waypoints.push_back(0); //waypoints[numWaypoints*i+j]);
+      waypoints.push_back(0); //waypoints[numWaypoints*i+j]);
+    }
+
+    quadrotor::Quadrotor* quad = new quadrotor::Quadrotor("../params/quadrotor.yaml",
+        name,
+        waypoints,
+        env,
+        use_random_seed,
+        i);
+    quads[i] = quad;
+
+    quadrotor::Controller* quadController = new quadrotor::Controller();
+    quadController->load("../params/quadrotor.yaml",
+        waypoints,
+        use_random_seed,
+        name);
+    quadControllers[i] = quadController;
+
+    quadrotor::WPManager* quadWPManager = new quadrotor::WPManager();
+    quadWPManager->load("../params/quadrotor.yaml",
+        waypoints,
+        use_random_seed,
+        name);
+    quadWPManagers[i] = quadWPManager;
+
+    quadrotor::CVOManager* quadCVOManager = new quadrotor::CVOManager();
+    quadCVOManager->load("../params/cvo.yaml",
+        &env,
+        i,
+        dt,
+        dt*100);
+    quadCVOManagers[i] = quadCVOManager;
+
+    // std::cout << "ID: " << quads[i]->id_ << std::endl;
+    // std::cout << "Name: " << quads[i]->name_ << std::endl;
+    env.initVehicle(quad->getState().p, quad->getState().v, quad->id_);
+
+  }
+
+
+
+  vehicle::Stated allXC[numVehicles];
+
+  // Main simulation loop
+  int nextUpdate = 10000;
+  std::set<std::pair<double,double>> set;
+  std::map<std::pair<double,double>, double> map;
+  int msos[numVehicles];
+  PyObject *
+  
+
+  while (t <= tf)
+  {
+    t += dt;
+    prog_bar.print(t/dt);
+    nextUpdate++;
+
+    // Run each vehicle
+    for(int i(0); i<numVehicles; i++)
+    {
+      quadCVOManagers[i]->propagate(t);
+        if(nextUpdate >= 1000)
+        {
+          // Right here is where I am going to put the MSO stuff. For now it won't implement the controller
+          Py_Initialize();
+
+          for j in range(p.num_vehicles):
+            vehicles[j].update_position(p.vehicle_positions[j][i])
+            if i == 0:
+                vehicles[j].pseudo_random_number(0)
+        # Begin MSO calculations
+        for j in range(p.num_vehicles):
+            mso = vehicles[j].full_mso_range()  # calculate MSO
+            false_from_high_power, false_from_minimum_trigger_level, false_by_chance = \
+                init_transmissions(vehicles, false_from_high_power,
+                                   false_from_minimum_trigger_level, false_by_chance, j, distances)
+            vehicles[j].frame += 1  # increase frame
+            msos.append(mso)  # record MSO
+            seconds[i].append(mso)  # record MSO in a way that helps with collisions
+        # copy = seconds[i].copy()
+        # copy.sort()
+        # print(copy)
+        false_from_closeness += evaluate_switching_modes(vehicles)
+        false_from_message_overlap += evaluate_consecutive_msos(vehicles)
+        false_from_collision += evaluate_collisions(seconds, vehicles, i, collision_objects, vehicles_per_collision,
+                                                    mso_collisions, collisions_in_time, filtered_mso_collisions,
+                                                    collision_distances)
+        num_MSO_collisions += len(collision_objects)
+        overall_collision_objects.append(collision_objects)
+        collisions_per_second.append(len(collision_objects))
+          // calculateCollisions(quads); // Load all states of the vehicles and find mso collisions
+          // for (int j(0); j<numVehicles; j++)
+          // {
+          //   if (!isCollision(i, j))
+          //   {
+          //     vehicle::Stated xc = quadWPManagers[i]->updateWaypointManager(quads[i]->getState());
+          //     quadCVOManagers[i]->get_best_vel(quads[i]->getState(), t, xc);
+          //     allXC[i] = xc;
+          //             // }
+          vehicle::Stated xc = quadWPManagers[i]->updateWaypointManager(quads[i]->getState());
+          quadCVOManagers[i]->get_best_vel(quads[i]->getState(), t, xc);
+          allXC[i] = xc;
+        }
+
+
+        // vehicle::Stated estimatedState = quads[i]->getState();
+        //
+        // VectorXd kalState = kalFilter.get_estimated_state();
+        // estimatedState.p[0] = kalState
+
+      quadrotor::uVector u = quadControllers[i]->computeControl(quads[i]->getState(), t, allXC[i]);
+      quads[i]->run(t, env, u);
+    }
+    if(nextUpdate >= 1000)
+    {
+      nextUpdate = 0;
+    }
+
+
+    // Update wind and stored vehicle positions in environment
+    env.updateWind(t);
+    for(int i(0); i<numVehicles; i++)
+    {
+        env.updateVehicle(quads[i]->getState().p, quads[i]->getState().v, quads[i]->id_);
+        for(int j(i); j<numVehicles; j++)
+        {
+          if(quads[i]->id_ == quads[j]->id_)
+            continue;
+          vehicle::Stated s1 = quads[i]->getState();
+          vehicle::Stated s2 = quads[j]->getState();
+          vehicle::dxVector s = s1 - s2;
+          if(s.segment<2>(0).norm() < 2)
+          {
+            // std::cout << quads[i]->getState().p << std::endl;
+            // std::cout << quads[j]->getState().p << std::endl;
+            // std::cout << s.segment<3>(0) << std::endl;
+            // std::cout << s.segment<3>(0).norm() << std::endl << std::endl;
+            std::pair<double,double> pair = std::make_pair(i,j);
+            set.insert(pair);
+            if(map.find(pair) == map.end())
+              map[pair] = s.segment<3>(0).norm();
+            else if(s.segment<3>(0).norm() < map[pair])
+              map[pair] = s.segment<3>(0).norm();
+          }
+
+        }
+    }
+  }
+  std::set<std::pair<double,double>>::iterator it = set.begin();
+  std::cout << "\n";
+  while (it != set.end())
+  {
+    std::cout << "Testing" << std::endl;
+  	std::cout << "pair: " <<  (*it).first << " , " << (*it).second << std::endl;
+    std::pair<double,double> temp = *it;
+    std::cout <<  "closest point: " << map[temp] << std::endl;
+    std::cout << "test" << std::endl;
+  	it++;
+  }
+
+  prog_bar.finished();
+
+  // ros::spin();
+
+  return 0;
+}

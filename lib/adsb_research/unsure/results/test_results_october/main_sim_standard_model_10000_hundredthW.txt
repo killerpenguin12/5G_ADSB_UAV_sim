@@ -1,0 +1,35 @@
+Simulation of 10000 vehicles for 30 seconds with an ERP of 0.01
+Number of 2-way MSO collisions: 20412
+Number of 3-way MSO collisions: 21221
+Number of 4-way MSO collisions: 16600
+Number of 5-way MSO collisions: 10445
+Number of 6-way MSO collisions: 5417
+Number of 7-way MSO collisions: 2497
+Number of 8-way MSO collisions: 1040
+Number of 9-way MSO collisions: 380
+Number of 10-way MSO collisions: 103
+Number of 11-way MSO collisions: 42
+Number of 12-way MSO collisions: 18
+Number of 13-way MSO collisions: 2
+Number of 14-way MSO collisions: 1
+Total MSO collisions: 78178
+Mean collisions per second: 2605.9333333333334 
+Variance: 4607.195555555556 
+Standard Deviation: 67.87632544234813
+Unsuccessful decodes: 2989421385
+Unsuccessful decodes / Desired decodes: 2989421385/2999700000 = 99.66 %
+Failed from MTL: 2978024472--99.28 %
+Failed by chance: 1331923--0.04 %
+Failed from closeness: 113741--0.0 %
+Failed from message overlap: 9707565--0.32 %
+Failed from MSO collision: 243684--0.01 %
+Failed from too high power: 0--0.0 %
+
+Failed by chance: 1331923--6.14 %
+Failed from closeness: 113741--0.52 %
+Failed from message overlap: 9707565--44.79 %
+Failed from MSO collision: 243684--1.12 %
+Failed from too high power: 0--0.0 %
+Unsuccessful decodes: 2989421385
+Unsuccessful decodes / Desired decodes: 11396913/21675528 = 52.58 %
+Total runtime: 30090.8824095726

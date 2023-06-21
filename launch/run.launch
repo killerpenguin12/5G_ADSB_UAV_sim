@@ -1,0 +1,9 @@
+<launch>
+
+  <node pkg="uav_sim" type="generate_waypoints.py" name="generate_waypoints" output="screen"/>
+  <node pkg="uav_sim" type="calculate_VO.py" name="calculate_VO" output="screen"/>
+  <node pkg="uav_sim" type="uav_sim_node" name="uav_sim" output="screen"/>
+
+
+
+</launch>

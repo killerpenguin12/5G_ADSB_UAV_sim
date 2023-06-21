@@ -1,0 +1,552 @@
+==32839== Memcheck, a memory error detector
+==32839== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==32839== Using Valgrind-3.19.0-8d3c8034b8-20220411 and LibVEX; rerun with -h for copyright info
+==32839== Command: ./monte_carlo_sim
+==32839== Parent PID: 28127
+==32839== 
+--32839-- 
+--32839-- Valgrind options:
+--32839--    --leak-check=full
+--32839--    --show-leak-kinds=all
+--32839--    --track-origins=yes
+--32839--    --verbose
+--32839--    --log-file=valgrind-out.txt
+--32839-- Contents of /proc/version:
+--32839--   Linux version 5.13.0-44-generic (buildd@lcy02-amd64-107) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022
+--32839-- 
+--32839-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--32839-- Page sizes: currently 4096, max supported 4096
+--32839-- Valgrind library directory: /usr/local/libexec/valgrind
+--32839-- Reading syms from /home/jonathan/Desktop/uav_sim/build/monte_carlo_sim
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-2.31.so
+--32839--   Considering /usr/lib/debug/.build-id/45/87364908de169dec62ffa538170118c1c3a078.debug ..
+--32839--   .. build-id is valid
+--32839-- Reading syms from /usr/local/libexec/valgrind/memcheck-amd64-linux
+--32839--    object doesn't have a dynamic symbol table
+--32839-- Scheduler: using generic scheduler lock implementation.
+--32839-- Reading suppressions file: /usr/local/libexec/valgrind/default.supp
+==32839== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-32839-by-jonathan-on-???
+==32839== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-32839-by-jonathan-on-???
+==32839== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-32839-by-jonathan-on-???
+==32839== 
+==32839== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==32839== don't want to do, unless you know exactly what you're doing,
+==32839== or are doing some strange experiment):
+==32839==   /usr/local/libexec/valgrind/../../bin/vgdb --pid=32839 ...command...
+==32839== 
+==32839== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==32839==   /path/to/gdb ./monte_carlo_sim
+==32839== and then give GDB the following command
+==32839==   target remote | /usr/local/libexec/valgrind/../../bin/vgdb --pid=32839
+==32839== --pid is optional if only one valgrind process is running
+==32839== 
+--32839-- REDIR: 0x4022e20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580cec02 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--32839-- REDIR: 0x4022bf0 (ld-linux-x86-64.so.2:index) redirected to 0x580cec1c (vgPlain_amd64_linux_REDIR_FOR_index)
+--32839-- Reading syms from /usr/local/libexec/valgrind/vgpreload_core-amd64-linux.so
+--32839-- Reading syms from /usr/local/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==32839== WARNING: new redirection conflicts with existing -- ignoring it
+--32839--     old: 0x04022e20 (strlen              ) R-> (0000.0) 0x580cec02 vgPlain_amd64_linux_REDIR_FOR_strlen
+--32839--     new: 0x04022e20 (strlen              ) R-> (2007.0) 0x04842760 strlen
+--32839-- REDIR: 0x401f600 (ld-linux-x86-64.so.2:strcmp) redirected to 0x48436d0 (strcmp)
+--32839-- REDIR: 0x4023380 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x48475d0 (mempcpy)
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.6.2
+--32839--    object doesn't have a symbol table
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+--32839--    object doesn't have a symbol table
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libm-2.31.so
+--32839--   Considering /usr/lib/debug/.build-id/fe/91b4090ea04c1559ff71dd9290062776618891.debug ..
+--32839--   .. build-id is valid
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+--32839--    object doesn't have a symbol table
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
+--32839--    object doesn't have a symbol table
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+--32839--   Considering /usr/lib/debug/.build-id/7b/4536f41cdaa5888408e82d0836e33dcf436466.debug ..
+--32839--   .. build-id is valid
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libc-2.31.so
+--32839--   Considering /usr/lib/debug/.build-id/18/78e6b475720c7c51969e69ab2d276fae6d1dee.debug ..
+--32839--   .. build-id is valid
+==32839== WARNING: new redirection conflicts with existing -- ignoring it
+--32839--     old: 0x04d12250 (memalign            ) R-> (1011.0) 0x048419fd memalign
+--32839--     new: 0x04d12250 (memalign            ) R-> (1017.0) 0x048419d0 aligned_alloc
+==32839== WARNING: new redirection conflicts with existing -- ignoring it
+--32839--     old: 0x04d12250 (memalign            ) R-> (1011.0) 0x048419fd memalign
+--32839--     new: 0x04d12250 (memalign            ) R-> (1017.0) 0x048419a3 aligned_alloc
+==32839== WARNING: new redirection conflicts with existing -- ignoring it
+--32839--     old: 0x04d12250 (memalign            ) R-> (1011.0) 0x048419fd memalign
+--32839--     new: 0x04d12250 (memalign            ) R-> (1017.0) 0x048419d0 aligned_alloc
+==32839== WARNING: new redirection conflicts with existing -- ignoring it
+--32839--     old: 0x04d12250 (memalign            ) R-> (1011.0) 0x048419fd memalign
+--32839--     new: 0x04d12250 (memalign            ) R-> (1017.0) 0x048419a3 aligned_alloc
+--32839-- Reading syms from /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+--32839--   Considering /usr/lib/debug/.build-id/c0/f40155b3f8bf8c494fa800f9ab197ebe20ed6e.debug ..
+--32839--   .. build-id is valid
+--32839-- REDIR: 0x4d17480 (libc.so.6:memmove) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+==32839== Preferring higher priority redirection:
+--32839--     old: 0x04e026e0 (__memcpy_avx_unalign) R-> (2018.0) 0x04844b00 __memcpy_avx_unaligned_erms
+--32839--     new: 0x04e026e0 (__memcpy_avx_unalign) R-> (2018.1) 0x048465a0 memmove
+--32839-- REDIR: 0x4d16780 (libc.so.6:strncpy) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d177b0 (libc.so.6:strcasecmp) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d160a0 (libc.so.6:strcat) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d167e0 (libc.so.6:rindex) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d18c50 (libc.so.6:rawmemchr) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d33ce0 (libc.so.6:wmemchr) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d33820 (libc.so.6:wcscmp) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d175e0 (libc.so.6:mempcpy) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d17410 (libc.so.6:bcmp) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16710 (libc.so.6:strncmp) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16150 (libc.so.6:strcmp) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d17540 (libc.so.6:memset) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d337e0 (libc.so.6:wcschr) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16670 (libc.so.6:strnlen) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16230 (libc.so.6:strcspn) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d17800 (libc.so.6:strncasecmp) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d161d0 (libc.so.6:strcpy) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d17950 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d34f50 (libc.so.6:wcsnlen) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d33860 (libc.so.6:wcscpy) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16820 (libc.so.6:strpbrk) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16100 (libc.so.6:index) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16630 (libc.so.6:strlen) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d1fbb0 (libc.so.6:memrchr) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d17850 (libc.so.6:strcasecmp_l) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d173d0 (libc.so.6:memchr) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d33930 (libc.so.6:wcslen) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d16ae0 (libc.so.6:strspn) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d17750 (libc.so.6:stpncpy) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d176f0 (libc.so.6:stpcpy) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d18c90 (libc.so.6:strchrnul) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4d178a0 (libc.so.6:strncasecmp_l) redirected to 0x48311bb (_vgnU_ifunc_wrapper)
+--32839-- REDIR: 0x4dff500 (libc.so.6:__strrchr_avx2) redirected to 0x4842110 (rindex)
+--32839-- REDIR: 0x4dff6d0 (libc.so.6:__strlen_avx2) redirected to 0x4842640 (strlen)
+--32839-- REDIR: 0x4d110e0 (libc.so.6:malloc) redirected to 0x483c7df (malloc)
+--32839-- REDIR: 0x4d116d0 (libc.so.6:free) redirected to 0x483f051 (free)
+--32839-- REDIR: 0x4e02b60 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4846490 (memset)
+--32839-- REDIR: 0x4dfbcc0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4845cc0 (bcmp)
+--32839-- REDIR: 0x4dfabd0 (libc.so.6:__strcmp_avx2) redirected to 0x48435d0 (strcmp)
+--32839-- REDIR: 0x4e026e0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x48465a0 (memmove)
+--32839-- REDIR: 0x496eb20 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x483cf71 (operator new(unsigned long))
+--32839-- REDIR: 0x4d12b10 (libc.so.6:calloc) redirected to 0x48413f1 (calloc)
+--32839-- REDIR: 0x4d16fa0 (libc.so.6:__GI_strstr) redirected to 0x4847850 (__strstr_sse2)
+--32839-- REDIR: 0x496eb80 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x483e1a5 (operator new[](unsigned long))
+--32839-- REDIR: 0x496cd70 (libstdc++.so.6:operator delete(void*)) redirected to 0x483f5df (operator delete(void*))
+--32839-- REDIR: 0x496cda0 (libstdc++.so.6:operator delete[](void*)) redirected to 0x48405eb (operator delete[](void*))
+--32839-- REDIR: 0x496cd80 (libstdc++.so.6:operator delete(void*, unsigned long)) redirected to 0x483f857 (operator delete(void*, unsigned long))
+--32839-- REDIR: 0x4dfb530 (libc.so.6:__memchr_avx2) redirected to 0x4843750 (memchr)
+--32839-- REDIR: 0x4dff310 (libc.so.6:__strchrnul_avx2) redirected to 0x48470f0 (strchrnul)
+==32839== Invalid read of size 8
+==32839==    at 0x5A387B: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:235)
+==32839==    by 0x5A33BF: CollisionVO::get_distance(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&) (collision_vo.cpp:212)
+==32839==    by 0x5A282B: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:68)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839==  Address 0x6a60c30 is 0 bytes after a block of size 16 alloc'd
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EEE2F: __gnu_cxx::new_allocator<double>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4EABFB: std::allocator_traits<std::allocator<double> >::allocate(std::allocator<double>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E59B9: std::_Vector_base<double, std::allocator<double> >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x4E3C52: void std::vector<double, std::allocator<double> >::_M_realloc_insert<double>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double&&) (vector.tcc:440)
+==32839==    by 0x4DDE39: void std::vector<double, std::allocator<double> >::emplace_back<double>(double&&) (vector.tcc:121)
+==32839==    by 0x4D91BF: std::vector<double, std::allocator<double> >::push_back(double&&) (stl_vector.h:1201)
+==32839==    by 0x5A37A0: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:230)
+==32839==    by 0x5A33BF: CollisionVO::get_distance(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&) (collision_vo.cpp:212)
+==32839==    by 0x5A282B: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:68)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== Invalid read of size 8
+==32839==    at 0x5A387B: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:235)
+==32839==    by 0x5A2AB3: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:97)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839==  Address 0x6a81e90 is 0 bytes after a block of size 16 alloc'd
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EEE2F: __gnu_cxx::new_allocator<double>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4EABFB: std::allocator_traits<std::allocator<double> >::allocate(std::allocator<double>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E59B9: std::_Vector_base<double, std::allocator<double> >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x4E3C52: void std::vector<double, std::allocator<double> >::_M_realloc_insert<double>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double&&) (vector.tcc:440)
+==32839==    by 0x4DDE39: void std::vector<double, std::allocator<double> >::emplace_back<double>(double&&) (vector.tcc:121)
+==32839==    by 0x4D91BF: std::vector<double, std::allocator<double> >::push_back(double&&) (stl_vector.h:1201)
+==32839==    by 0x5A37A0: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:230)
+==32839==    by 0x5A2AB3: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:97)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== Invalid read of size 8
+==32839==    at 0x5A387B: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:235)
+==32839==    by 0x5A2C37: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:115)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839==  Address 0x6aa5330 is 0 bytes after a block of size 16 alloc'd
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EEE2F: __gnu_cxx::new_allocator<double>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4EABFB: std::allocator_traits<std::allocator<double> >::allocate(std::allocator<double>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E59B9: std::_Vector_base<double, std::allocator<double> >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x4E3C52: void std::vector<double, std::allocator<double> >::_M_realloc_insert<double>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double&&) (vector.tcc:440)
+==32839==    by 0x4DDE39: void std::vector<double, std::allocator<double> >::emplace_back<double>(double&&) (vector.tcc:121)
+==32839==    by 0x4D91BF: std::vector<double, std::allocator<double> >::push_back(double&&) (stl_vector.h:1201)
+==32839==    by 0x5A37A0: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:230)
+==32839==    by 0x5A2C37: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:115)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== Conditional jump or move depends on uninitialised value(s)
+==32839==    at 0x4D1840: main (monte_carlo_sim.cpp:568)
+==32839==  Uninitialised value was created by a heap allocation
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EDE6B: __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4E993A: std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E3969: std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long) (stl_bvector.h:534)
+==32839==    by 0x4DD90A: std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long) (stl_bvector.h:1124)
+==32839==    by 0x4EBA9B: std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) (stl_bvector.h:659)
+==32839==    by 0x4E6F64: void __gnu_cxx::new_allocator<std::vector<bool, std::allocator<bool> > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (new_allocator.h:146)
+==32839==    by 0x4E1449: void std::allocator_traits<std::allocator<std::vector<bool, std::allocator<bool> > > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::allocator<std::vector<bool, std::allocator<bool> > >&, std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (alloc_traits.h:483)
+==32839==    by 0x4DB091: std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::push_back(std::vector<bool, std::allocator<bool> > const&) (stl_vector.h:1189)
+==32839==    by 0x4D16C9: main (monte_carlo_sim.cpp:534)
+==32839== 
+==32839== Conditional jump or move depends on uninitialised value(s)
+==32839==    at 0x4D1A69: main (monte_carlo_sim.cpp:619)
+==32839==  Uninitialised value was created by a heap allocation
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EDE6B: __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4E993A: std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E3969: std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long) (stl_bvector.h:534)
+==32839==    by 0x4DD90A: std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long) (stl_bvector.h:1124)
+==32839==    by 0x4EBA9B: std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) (stl_bvector.h:659)
+==32839==    by 0x4E6F64: void __gnu_cxx::new_allocator<std::vector<bool, std::allocator<bool> > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (new_allocator.h:146)
+==32839==    by 0x4E1449: void std::allocator_traits<std::allocator<std::vector<bool, std::allocator<bool> > > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::allocator<std::vector<bool, std::allocator<bool> > >&, std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (alloc_traits.h:483)
+==32839==    by 0x4DB091: std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::push_back(std::vector<bool, std::allocator<bool> > const&) (stl_vector.h:1189)
+==32839==    by 0x4D16C9: main (monte_carlo_sim.cpp:534)
+==32839== 
+--32839-- REDIR: 0x4e026c0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4847210 (mempcpy)
+--32839-- memcheck GC: 1000 nodes, 1 survivors (0.1%)
+==32839== 
+==32839== HEAP SUMMARY:
+==32839==     in use at exit: 208,216 bytes in 541 blocks
+==32839==   total heap usage: 4,424,352 allocs, 4,423,811 frees, 641,384,632 bytes allocated
+==32839== 
+==32839== Searching for pointers to 541 not-freed blocks
+==32839== Checked 160,016 bytes
+==32839== 
+==32839== 8 bytes in 1 blocks are still reachable in loss record 1 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x4C0124C: ??? (in /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0)
+==32839==    by 0x4C11BAA: ??? (in /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0)
+==32839==    by 0x4BFF679: ??? (in /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0)
+==32839==    by 0x4011B99: call_init.part.0 (dl-init.c:72)
+==32839==    by 0x4011CA0: call_init (dl-init.c:30)
+==32839==    by 0x4011CA0: _dl_init (dl-init.c:119)
+==32839==    by 0x4001139: ??? (in /usr/lib/x86_64-linux-gnu/ld-2.31.so)
+==32839== 
+==32839== 640 bytes in 10 blocks are indirectly lost in loss record 2 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x54D5A6: void Eigen::internal::resize_if_allowed<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, double, double>(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:720)
+==32839==    by 0x54C8E3: void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:734)
+==32839==    by 0x54BE38: Eigen::internal::Assignment<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::internal::assign_op<double, double>, Eigen::internal::Dense2Dense, void>::run(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:879)
+==32839==    by 0x54B925: void Eigen::internal::call_assignment_no_alias<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:836)
+==32839==    by 0x54B3A3: void Eigen::internal::call_assignment<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&, Eigen::internal::assign_op<double, double> const&, Eigen::internal::enable_if<!Eigen::internal::evaluator_assume_aliasing<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> >, Eigen::internal::evaluator_traits<Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >::Shape>::value, void*>::type) (AssignEvaluator.h:804)
+==32839==    by 0x54AD01: void Eigen::internal::call_assignment<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::Map<Eigen::Matrix<double, -1, -1, 0, -1, -1>, 0, Eigen::Stride<0, 0> > const&) (AssignEvaluator.h:782)
+==32839== 
+==32839== 1,472 bytes in 46 blocks are indirectly lost in loss record 3 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x564C2D: void Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resizeLike<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> >(Eigen::EigenBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> > const&) (PlainObjectBase.h:377)
+==32839==    by 0x5636AC: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::PlainObjectBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> >(Eigen::DenseBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> > const&) (PlainObjectBase.h:536)
+==32839==    by 0x56172B: Eigen::Matrix<double, -1, -1, 0, -1, -1>::Matrix<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> >(Eigen::EigenBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> > const&) (Matrix.h:377)
+==32839==    by 0x55F2B2: GenKalmanFilter::build_R(unsigned int) (gen_kalman_filter.cpp:250)
+==32839==    by 0x55CF52: GenKalmanFilter::init(double, double, double, double, double, double, double, double, MotionModelType, double, unsigned int, unsigned int, Eigen::Matrix<double, -1, 1, 0, -1, 1>) (gen_kalman_filter.cpp:52)
+==32839==    by 0x551FBD: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:198)
+==32839== 
+==32839== 1,728 bytes in 4 blocks are indirectly lost in loss record 4 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4D0AC2: main (monte_carlo_sim.cpp:311)
+==32839== 
+==32839== 2,016 bytes in 42 blocks are indirectly lost in loss record 5 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x558950: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> > >::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x557E5F: std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> > > >::allocate(std::allocator<std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> > >&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x556E0C: std::_Rb_tree<int, std::pair<int const, GenKalmanFilter*>, std::_Select1st<std::pair<int const, GenKalmanFilter*> >, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::_M_get_node() (stl_tree.h:580)
+==32839==    by 0x5555F8: std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> >* std::_Rb_tree<int, std::pair<int const, GenKalmanFilter*>, std::_Select1st<std::pair<int const, GenKalmanFilter*> >, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::_M_create_node<std::piecewise_construct_t const&, std::tuple<int const&>, std::tuple<> >(std::piecewise_construct_t const&, std::tuple<int const&>&&, std::tuple<>&&) (stl_tree.h:630)
+==32839==    by 0x55442A: std::_Rb_tree_iterator<std::pair<int const, GenKalmanFilter*> > std::_Rb_tree<int, std::pair<int const, GenKalmanFilter*>, std::_Select1st<std::pair<int const, GenKalmanFilter*> >, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int const&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, GenKalmanFilter*> >, std::piecewise_construct_t const&, std::tuple<int const&>&&, std::tuple<>&&) (stl_tree.h:2460)
+==32839==    by 0x55362F: std::map<int, GenKalmanFilter*, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::operator[](int const&) (stl_map.h:499)
+==32839==    by 0x551B0B: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:175)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== 2,112 bytes in 10 blocks are indirectly lost in loss record 6 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50D39D: Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> >::allocate(unsigned long, void const*) (Memory.h:758)
+==32839==    by 0x50BF01: std::allocator_traits<Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::allocate(Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> >&, unsigned long) (alloc_traits.h:305)
+==32839==    by 0x50A94B: std::_Vector_base<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x509160: void std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::_M_realloc_insert<Eigen::Matrix<double, 3, 1, 0, 3, 1> const&>(__gnu_cxx::__normal_iterator<Eigen::Matrix<double, 3, 1, 0, 3, 1>*, std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > > >, Eigen::Matrix<double, 3, 1, 0, 3, 1> const&) (vector.tcc:440)
+==32839==    by 0x507D19: std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::push_back(Eigen::Matrix<double, 3, 1, 0, 3, 1> const&) (stl_vector.h:1195)
+==32839==    by 0x513EAA: quadrotor::Quadrotor::getOtherVehicles(std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > > const&, std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > > const&) (quadrotor.cpp:224)
+==32839==    by 0x5135CA: quadrotor::Quadrotor::run(double const&, environment::Environment const&, Eigen::Matrix<double, 4, 1, 0, 4, 1>) (quadrotor.cpp:121)
+==32839==    by 0x4D28BF: main (monte_carlo_sim.cpp:801)
+==32839== 
+==32839== 2,112 bytes in 10 blocks are indirectly lost in loss record 7 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50D39D: Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> >::allocate(unsigned long, void const*) (Memory.h:758)
+==32839==    by 0x50BF01: std::allocator_traits<Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::allocate(Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> >&, unsigned long) (alloc_traits.h:305)
+==32839==    by 0x50A94B: std::_Vector_base<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x509160: void std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::_M_realloc_insert<Eigen::Matrix<double, 3, 1, 0, 3, 1> const&>(__gnu_cxx::__normal_iterator<Eigen::Matrix<double, 3, 1, 0, 3, 1>*, std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > > >, Eigen::Matrix<double, 3, 1, 0, 3, 1> const&) (vector.tcc:440)
+==32839==    by 0x507D19: std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > >::push_back(Eigen::Matrix<double, 3, 1, 0, 3, 1> const&) (stl_vector.h:1195)
+==32839==    by 0x513ED5: quadrotor::Quadrotor::getOtherVehicles(std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > > const&, std::vector<Eigen::Matrix<double, 3, 1, 0, 3, 1>, Eigen::aligned_allocator<Eigen::Matrix<double, 3, 1, 0, 3, 1> > > const&) (quadrotor.cpp:225)
+==32839==    by 0x5135CA: quadrotor::Quadrotor::run(double const&, environment::Environment const&, Eigen::Matrix<double, 4, 1, 0, 4, 1>) (quadrotor.cpp:121)
+==32839==    by 0x4D28BF: main (monte_carlo_sim.cpp:801)
+==32839== 
+==32839== 2,944 bytes in 46 blocks are indirectly lost in loss record 8 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x50C129: Eigen::DenseStorage<double, -1, -1, 1, 0>::resize(long, long, long) (DenseStorage.h:557)
+==32839==    by 0x510D84: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x5103AA: void Eigen::internal::resize_if_allowed<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, double, double>(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:720)
+==32839==    by 0x50F57C: void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:734)
+==32839==    by 0x50E6E1: Eigen::internal::Assignment<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::assign_op<double, double>, Eigen::internal::Dense2Dense, void>::run(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:879)
+==32839==    by 0x50D72C: void Eigen::internal::call_assignment_no_alias<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:836)
+==32839==    by 0x50C7B2: void Eigen::internal::call_assignment<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, Eigen::internal::assign_op<double, double> const&, Eigen::internal::enable_if<!Eigen::internal::evaluator_assume_aliasing<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::internal::evaluator_traits<Eigen::Matrix<double, -1, 1, 0, -1, 1> >::Shape>::value, void*>::type) (AssignEvaluator.h:804)
+==32839==    by 0x50B311: void Eigen::internal::call_assignment<Eigen::Matrix<double, -1, 1, 0, -1, 1>, Eigen::Matrix<double, -1, 1, 0, -1, 1> >(Eigen::Matrix<double, -1, 1, 0, -1, 1>&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&) (AssignEvaluator.h:782)
+==32839== 
+==32839== 5,120 (4,480 direct, 640 indirect) bytes in 10 blocks are definitely lost in loss record 9 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4D09E1: main (monte_carlo_sim.cpp:303)
+==32839== 
+==32839== 5,888 bytes in 46 blocks are indirectly lost in loss record 10 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x56429F: void Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resizeLike<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:377)
+==32839==    by 0x5628A8: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::PlainObjectBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::DenseBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:536)
+==32839==    by 0x560D07: Eigen::Matrix<double, -1, -1, 0, -1, -1>::Matrix<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (Matrix.h:377)
+==32839==    by 0x55F03A: GenKalmanFilter::build_C(unsigned int, unsigned int) (gen_kalman_filter.cpp:217)
+==32839==    by 0x55CEC4: GenKalmanFilter::init(double, double, double, double, double, double, double, double, MotionModelType, double, unsigned int, unsigned int, Eigen::Matrix<double, -1, 1, 0, -1, 1>) (gen_kalman_filter.cpp:50)
+==32839==    by 0x551FBD: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:198)
+==32839== 
+==32839== 5,888 bytes in 46 blocks are indirectly lost in loss record 11 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x564C2D: void Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resizeLike<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> >(Eigen::EigenBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> > const&) (PlainObjectBase.h:377)
+==32839==    by 0x5636AC: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::PlainObjectBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> >(Eigen::DenseBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> > const&) (PlainObjectBase.h:536)
+==32839==    by 0x56172B: Eigen::Matrix<double, -1, -1, 0, -1, -1>::Matrix<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> >(Eigen::EigenBase<Eigen::Block<Eigen::Matrix<double, -1, -1, 0, -1, -1>, -1, -1, false> > const&) (Matrix.h:377)
+==32839==    by 0x55F2B2: GenKalmanFilter::build_R(unsigned int) (gen_kalman_filter.cpp:250)
+==32839==    by 0x55CF93: GenKalmanFilter::init(double, double, double, double, double, double, double, double, MotionModelType, double, unsigned int, unsigned int, Eigen::Matrix<double, -1, 1, 0, -1, 1>) (gen_kalman_filter.cpp:54)
+==32839==    by 0x551FBD: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:198)
+==32839== 
+==32839== 10,240 bytes in 10 blocks are indirectly lost in loss record 12 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EE9ED: __gnu_cxx::new_allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> >::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4EA639: std::allocator_traits<std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > >::allocate(std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> >&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E4C8D: std::_Vector_base<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x4DEC88: void std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > >::_M_realloc_insert<Eigen::Matrix<double, 2, 1, 0, 2, 1> const&>(__gnu_cxx::__normal_iterator<Eigen::Matrix<double, 2, 1, 0, 2, 1>*, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > >, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&) (vector.tcc:440)
+==32839==    by 0x4D9BDD: std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > >::push_back(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&) (stl_vector.h:1195)
+==32839==    by 0x5A3DF9: CollisionVO::get_admissible_velocities(Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, int) (collision_vo.cpp:292)
+==32839==    by 0x5A2464: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:19)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== 11,776 bytes in 46 blocks are indirectly lost in loss record 13 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x56429F: void Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resizeLike<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:377)
+==32839==    by 0x5628A8: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::PlainObjectBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::DenseBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:536)
+==32839==    by 0x560D07: Eigen::Matrix<double, -1, -1, 0, -1, -1>::Matrix<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (Matrix.h:377)
+==32839==    by 0x55F03A: GenKalmanFilter::build_C(unsigned int, unsigned int) (gen_kalman_filter.cpp:217)
+==32839==    by 0x55CF11: GenKalmanFilter::init(double, double, double, double, double, double, double, double, MotionModelType, double, unsigned int, unsigned int, Eigen::Matrix<double, -1, 1, 0, -1, 1>) (gen_kalman_filter.cpp:51)
+==32839==    by 0x551FBD: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:198)
+==32839== 
+==32839== 23,424 (19,200 direct, 4,224 indirect) bytes in 10 blocks are definitely lost in loss record 14 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4D085E: main (monte_carlo_sim.cpp:290)
+==32839== 
+==32839== 23,552 bytes in 46 blocks are indirectly lost in loss record 15 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x564863: void Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resizeLike<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:377)
+==32839==    by 0x56314E: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::PlainObjectBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::DenseBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:536)
+==32839==    by 0x56125F: Eigen::Matrix<double, -1, -1, 0, -1, -1>::Matrix<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (Matrix.h:377)
+==32839==    by 0x55DB5D: GenKalmanFilter::build_A() (gen_kalman_filter.cpp:141)
+==32839==    by 0x55CE3B: GenKalmanFilter::init(double, double, double, double, double, double, double, double, MotionModelType, double, unsigned int, unsigned int, Eigen::Matrix<double, -1, 1, 0, -1, 1>) (gen_kalman_filter.cpp:47)
+==32839==    by 0x551FBD: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:198)
+==32839== 
+==32839== 23,552 bytes in 46 blocks are indirectly lost in loss record 16 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x564863: void Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resizeLike<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:377)
+==32839==    by 0x56314E: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::PlainObjectBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::DenseBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (PlainObjectBase.h:536)
+==32839==    by 0x56125F: Eigen::Matrix<double, -1, -1, 0, -1, -1>::Matrix<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > >(Eigen::EigenBase<Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > > const&) (Matrix.h:377)
+==32839==    by 0x55DD31: GenKalmanFilter::build_Q() (gen_kalman_filter.cpp:160)
+==32839==    by 0x55CE77: GenKalmanFilter::init(double, double, double, double, double, double, double, double, MotionModelType, double, unsigned int, unsigned int, Eigen::Matrix<double, -1, 1, 0, -1, 1>) (gen_kalman_filter.cpp:48)
+==32839==    by 0x551FBD: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:198)
+==32839== 
+==32839== 23,552 bytes in 46 blocks are indirectly lost in loss record 17 of 21
+==32839==    at 0x483C855: malloc (vg_replace_malloc.c:381)
+==32839==    by 0x506421: Eigen::internal::aligned_malloc(unsigned long) (Memory.h:159)
+==32839==    by 0x50B79A: void* Eigen::internal::conditional_aligned_malloc<true>(unsigned long) (Memory.h:214)
+==32839==    by 0x509FEE: double* Eigen::internal::conditional_aligned_new_auto<double, true>(unsigned long) (Memory.h:374)
+==32839==    by 0x5086DB: Eigen::DenseStorage<double, -1, -1, -1, 0>::resize(long, long, long) (DenseStorage.h:408)
+==32839==    by 0x5074E5: Eigen::PlainObjectBase<Eigen::Matrix<double, -1, -1, 0, -1, -1> >::resize(long, long) (PlainObjectBase.h:293)
+==32839==    by 0x568B6A: void Eigen::internal::resize_if_allowed<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const>, double, double>(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:720)
+==32839==    by 0x5671FF: void Eigen::internal::call_dense_assignment_loop<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:734)
+==32839==    by 0x566386: Eigen::internal::Assignment<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const>, Eigen::internal::assign_op<double, double>, Eigen::internal::Dense2Dense, void>::run(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:879)
+==32839==    by 0x565BE1: void Eigen::internal::call_assignment_no_alias<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> const&, Eigen::internal::assign_op<double, double> const&) (AssignEvaluator.h:836)
+==32839==    by 0x56503D: void Eigen::internal::call_assignment<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const>, Eigen::internal::assign_op<double, double> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> const&, Eigen::internal::assign_op<double, double> const&, Eigen::internal::enable_if<!Eigen::internal::evaluator_assume_aliasing<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const>, Eigen::internal::evaluator_traits<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> >::Shape>::value, void*>::type) (AssignEvaluator.h:804)
+==32839==    by 0x563C43: void Eigen::internal::call_assignment<Eigen::Matrix<double, -1, -1, 0, -1, -1>, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> >(Eigen::Matrix<double, -1, -1, 0, -1, -1>&, Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, Eigen::CwiseNullaryOp<Eigen::internal::scalar_identity_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> > const, Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1, 0, -1, -1> const> const> const&) (AssignEvaluator.h:782)
+==32839== 
+==32839== 27,840 bytes in 10 blocks are definitely lost in loss record 18 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4D08FE: main (monte_carlo_sim.cpp:295)
+==32839== 
+==32839== 36,432 bytes in 46 blocks are indirectly lost in loss record 19 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x551AE7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:175)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== 68,488 (192 direct, 68,296 indirect) bytes in 4 blocks are definitely lost in loss record 20 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x558950: __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> > >::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x557E5F: std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> > > >::allocate(std::allocator<std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> > >&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x556E0C: std::_Rb_tree<int, std::pair<int const, GenKalmanFilter*>, std::_Select1st<std::pair<int const, GenKalmanFilter*> >, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::_M_get_node() (stl_tree.h:580)
+==32839==    by 0x5555F8: std::_Rb_tree_node<std::pair<int const, GenKalmanFilter*> >* std::_Rb_tree<int, std::pair<int const, GenKalmanFilter*>, std::_Select1st<std::pair<int const, GenKalmanFilter*> >, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::_M_create_node<std::piecewise_construct_t const&, std::tuple<int const&>, std::tuple<> >(std::piecewise_construct_t const&, std::tuple<int const&>&&, std::tuple<>&&) (stl_tree.h:630)
+==32839==    by 0x55442A: std::_Rb_tree_iterator<std::pair<int const, GenKalmanFilter*> > std::_Rb_tree<int, std::pair<int const, GenKalmanFilter*>, std::_Select1st<std::pair<int const, GenKalmanFilter*> >, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::_M_emplace_hint_unique<std::piecewise_construct_t const&, std::tuple<int const&>, std::tuple<> >(std::_Rb_tree_const_iterator<std::pair<int const, GenKalmanFilter*> >, std::piecewise_construct_t const&, std::tuple<int const&>&&, std::tuple<>&&) (stl_tree.h:2460)
+==32839==    by 0x55362F: std::map<int, GenKalmanFilter*, std::less<int>, std::allocator<std::pair<int const, GenKalmanFilter*> > >::operator[](int const&) (stl_map.h:499)
+==32839==    by 0x551B0B: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:175)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== 83,336 (2,592 direct, 80,744 indirect) bytes in 6 blocks are definitely lost in loss record 21 of 21
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4D0AC2: main (monte_carlo_sim.cpp:311)
+==32839== 
+==32839== LEAK SUMMARY:
+==32839==    definitely lost: 54,304 bytes in 40 blocks
+==32839==    indirectly lost: 153,904 bytes in 500 blocks
+==32839==      possibly lost: 0 bytes in 0 blocks
+==32839==    still reachable: 8 bytes in 1 blocks
+==32839==         suppressed: 0 bytes in 0 blocks
+==32839== 
+==32839== ERROR SUMMARY: 874830 errors from 10 contexts (suppressed: 0 from 0)
+==32839== 
+==32839== 3 errors in context 1 of 10:
+==32839== Conditional jump or move depends on uninitialised value(s)
+==32839==    at 0x4D1A69: main (monte_carlo_sim.cpp:619)
+==32839==  Uninitialised value was created by a heap allocation
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EDE6B: __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4E993A: std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E3969: std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long) (stl_bvector.h:534)
+==32839==    by 0x4DD90A: std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long) (stl_bvector.h:1124)
+==32839==    by 0x4EBA9B: std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) (stl_bvector.h:659)
+==32839==    by 0x4E6F64: void __gnu_cxx::new_allocator<std::vector<bool, std::allocator<bool> > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (new_allocator.h:146)
+==32839==    by 0x4E1449: void std::allocator_traits<std::allocator<std::vector<bool, std::allocator<bool> > > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::allocator<std::vector<bool, std::allocator<bool> > >&, std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (alloc_traits.h:483)
+==32839==    by 0x4DB091: std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::push_back(std::vector<bool, std::allocator<bool> > const&) (stl_vector.h:1189)
+==32839==    by 0x4D16C9: main (monte_carlo_sim.cpp:534)
+==32839== 
+==32839== 
+==32839== 7 errors in context 2 of 10:
+==32839== Conditional jump or move depends on uninitialised value(s)
+==32839==    at 0x4D1840: main (monte_carlo_sim.cpp:568)
+==32839==  Uninitialised value was created by a heap allocation
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EDE6B: __gnu_cxx::new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4E993A: std::allocator_traits<std::allocator<unsigned long> >::allocate(std::allocator<unsigned long>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E3969: std::_Bvector_base<std::allocator<bool> >::_M_allocate(unsigned long) (stl_bvector.h:534)
+==32839==    by 0x4DD90A: std::vector<bool, std::allocator<bool> >::_M_initialize(unsigned long) (stl_bvector.h:1124)
+==32839==    by 0x4EBA9B: std::vector<bool, std::allocator<bool> >::vector(std::vector<bool, std::allocator<bool> > const&) (stl_bvector.h:659)
+==32839==    by 0x4E6F64: void __gnu_cxx::new_allocator<std::vector<bool, std::allocator<bool> > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (new_allocator.h:146)
+==32839==    by 0x4E1449: void std::allocator_traits<std::allocator<std::vector<bool, std::allocator<bool> > > >::construct<std::vector<bool, std::allocator<bool> >, std::vector<bool, std::allocator<bool> > const&>(std::allocator<std::vector<bool, std::allocator<bool> > >&, std::vector<bool, std::allocator<bool> >*, std::vector<bool, std::allocator<bool> > const&) (alloc_traits.h:483)
+==32839==    by 0x4DB091: std::vector<std::vector<bool, std::allocator<bool> >, std::allocator<std::vector<bool, std::allocator<bool> > > >::push_back(std::vector<bool, std::allocator<bool> > const&) (stl_vector.h:1189)
+==32839==    by 0x4D16C9: main (monte_carlo_sim.cpp:534)
+==32839== 
+==32839== 
+==32839== 290712 errors in context 3 of 10:
+==32839== Invalid read of size 8
+==32839==    at 0x5A387B: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:235)
+==32839==    by 0x5A2C37: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:115)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839==  Address 0x6aa5330 is 0 bytes after a block of size 16 alloc'd
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EEE2F: __gnu_cxx::new_allocator<double>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4EABFB: std::allocator_traits<std::allocator<double> >::allocate(std::allocator<double>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E59B9: std::_Vector_base<double, std::allocator<double> >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x4E3C52: void std::vector<double, std::allocator<double> >::_M_realloc_insert<double>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double&&) (vector.tcc:440)
+==32839==    by 0x4DDE39: void std::vector<double, std::allocator<double> >::emplace_back<double>(double&&) (vector.tcc:121)
+==32839==    by 0x4D91BF: std::vector<double, std::allocator<double> >::push_back(double&&) (stl_vector.h:1201)
+==32839==    by 0x5A37A0: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:230)
+==32839==    by 0x5A2C37: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:115)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== 
+==32839== 290712 errors in context 4 of 10:
+==32839== Invalid read of size 8
+==32839==    at 0x5A387B: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:235)
+==32839==    by 0x5A2AB3: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:97)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839==  Address 0x6a81e90 is 0 bytes after a block of size 16 alloc'd
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EEE2F: __gnu_cxx::new_allocator<double>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4EABFB: std::allocator_traits<std::allocator<double> >::allocate(std::allocator<double>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E59B9: std::_Vector_base<double, std::allocator<double> >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x4E3C52: void std::vector<double, std::allocator<double> >::_M_realloc_insert<double>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double&&) (vector.tcc:440)
+==32839==    by 0x4DDE39: void std::vector<double, std::allocator<double> >::emplace_back<double>(double&&) (vector.tcc:121)
+==32839==    by 0x4D91BF: std::vector<double, std::allocator<double> >::push_back(double&&) (stl_vector.h:1201)
+==32839==    by 0x5A37A0: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:230)
+==32839==    by 0x5A2AB3: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:97)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== 
+==32839== 293391 errors in context 5 of 10:
+==32839== Invalid read of size 8
+==32839==    at 0x5A387B: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:235)
+==32839==    by 0x5A33BF: CollisionVO::get_distance(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&) (collision_vo.cpp:212)
+==32839==    by 0x5A282B: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:68)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839==  Address 0x6a60c30 is 0 bytes after a block of size 16 alloc'd
+==32839==    at 0x483CFE3: operator new(unsigned long) (vg_replace_malloc.c:422)
+==32839==    by 0x4EEE2F: __gnu_cxx::new_allocator<double>::allocate(unsigned long, void const*) (new_allocator.h:114)
+==32839==    by 0x4EABFB: std::allocator_traits<std::allocator<double> >::allocate(std::allocator<double>&, unsigned long) (alloc_traits.h:443)
+==32839==    by 0x4E59B9: std::_Vector_base<double, std::allocator<double> >::_M_allocate(unsigned long) (stl_vector.h:343)
+==32839==    by 0x4E3C52: void std::vector<double, std::allocator<double> >::_M_realloc_insert<double>(__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double&&) (vector.tcc:440)
+==32839==    by 0x4DDE39: void std::vector<double, std::allocator<double> >::emplace_back<double>(double&&) (vector.tcc:121)
+==32839==    by 0x4D91BF: std::vector<double, std::allocator<double> >::push_back(double&&) (stl_vector.h:1201)
+==32839==    by 0x5A37A0: CollisionVO::line_ellipse_intersect(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&, double&) (collision_vo.cpp:230)
+==32839==    by 0x5A33BF: CollisionVO::get_distance(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double&) (collision_vo.cpp:212)
+==32839==    by 0x5A282B: CollisionVO::get_best_vel(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, Eigen::Matrix<double, -1, 1, 0, -1, 1> const&, double const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&, std::vector<Eigen::Matrix<double, 2, 1, 0, 2, 1>, std::allocator<Eigen::Matrix<double, 2, 1, 0, 2, 1> > > const&) (collision_vo.cpp:68)
+==32839==    by 0x552AB7: quadrotor::CVOManager::get_best_vel(vehicle::State<double> const&, double, vehicle::State<double>&, std::vector<int, std::allocator<int> >) (quad_cvo_manager.cpp:274)
+==32839==    by 0x4D278C: main (monte_carlo_sim.cpp:789)
+==32839== 
+==32839== ERROR SUMMARY: 874830 errors from 10 contexts (suppressed: 0 from 0)

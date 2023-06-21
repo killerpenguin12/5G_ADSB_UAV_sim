@@ -1,0 +1,14 @@
+Number of 2-way MSO collisions: 5930
+Number of 3-way MSO collisions: 867
+Number of 4-way MSO collisions: 101
+Number of 5-way MSO collisions: 10
+Number of 6-way MSO collisions: 2
+Total MSO collisions: 6910
+Unsuccessful decodes: 30701736
+Unsuccessful decodes / Desired decodes: 30701736/58758000 = 52.25 %
+Failed from MTL: 0--0.0 % I didn't check for this this time. 
+Failed from closeness: 311586--0.53 %
+Failed from message overlap: 15203446--25.87 %
+Failed from MSO collision: 15186704--25.85 %
+Failed from too high power: 0--0.0 % I didn't check for this, because it very seldom occurs. 
+Total runtime: 403.8438153266907

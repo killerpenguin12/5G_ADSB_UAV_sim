@@ -1,0 +1,8 @@
+# Service to return waypoints given number of vehicles
+uint8 numberVehicles
+float32 radius
+---
+float32[] x       # waypoints in x
+float32[] y      # waypoints in y
+float32[] z        # waypoints in z
+float32[] dir      # direction of waypoint

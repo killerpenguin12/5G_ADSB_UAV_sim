@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcollision_vo.a  CMakeFiles/collision_vo.dir/src/collision_vo.cpp.o CMakeFiles/collision_vo.dir/src/utils.cpp.o CMakeFiles/collision_vo.dir/src/admissible_velocities.cpp.o CMakeFiles/collision_vo.dir/src/convex_hull.cpp.o CMakeFiles/collision_vo.dir/src/buffer.cpp.o
+/usr/bin/ranlib libcollision_vo.a

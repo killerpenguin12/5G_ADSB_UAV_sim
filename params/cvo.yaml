@@ -1,0 +1,38 @@
+
+collision_radius: 10 # Radius for collision, eg have a crash according to FAA
+collision_range: 40 # Range for collision dectection, eg the size of collision cone
+collision_acceleration: 500 # Acceleration was 100
+time_collision_penality: 300 # Time penalty, was 100
+pos_uncertain_penalty: 2 #was 2
+vel_uncertain_penalty: 2 #was 2
+num_points_admissible: 5
+
+solve_order: 5
+
+gps_position_stdev: 3.0
+gps_velocity_stdev: 1.0
+
+drop_probability: 0 # Values between 0 and 100, 50 from paper
+
+sigmaQ_vel: 3
+alphaQ_vel: 0.5
+sigmaQ_jrk: 0.2
+alphaQ_jrk: 0.5
+
+sigmaR_pos: 3.0
+sigmaR_vel: 1.0
+
+uncertainty_on: true
+
+kalman_on: true
+
+radar_measurement: false
+
+sigmaR_range: 0.6
+sigmaR_zenith: 0.01745
+radar_x: 0
+radar_y: -200
+
+
+buffer_on: false
+buffer_power: 50
